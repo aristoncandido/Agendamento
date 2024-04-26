@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+
 
     <style>
     body {
@@ -18,21 +21,8 @@
         margin: 0 auto;
     }
     </style>
-    <script>
 
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
-        });
-        calendar.render();
-    });
-
-
-
-    </script>
+    <!-- importando o meu JS personalizado -->
 
 
 
@@ -63,7 +53,9 @@
 
 
 
-
+<!-- Usando uma CDN do Google -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- importando o jQuery -->
+<script src="./JS/custom.js"></script>
 </head>
 
 </html>

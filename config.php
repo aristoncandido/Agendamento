@@ -11,6 +11,6 @@ $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Conex達o falhou: " . $conn->connect_error);
 }
-/* echo "Conex達o bem-sucedida"; */
+
 
 ?>
