@@ -1,7 +1,10 @@
 <?php
 include_once('config.php');
+
 ?>
 <!DOCTYPE html>
+<link rel="stylesheet" href="./CSS/style.css">
+
 
 <body>
 
@@ -14,5 +17,10 @@ include_once('config.php');
 
 
 </body>
+
+
+
+
+
 
 </html>

@@ -1,58 +1,49 @@
 document.addEventListener("DOMContentLoaded", function () {
+  var data_cal = new Date(); //cria o objeto data
+
   var calendarEl = document.getElementById("calendar");
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialDate: "2024-04-26", //data inicial
-    editable: true,
-    locale: "pt-br", //localização BR
-    selectable: true,
-    businessHours: true,
-    dayMaxEvents: true, // allow "more" link when too many events
-    events: [
-      {
-        title: "Fiscalização",
-        start: "2024-04-25T08:45:00",
-      },
-    ],
-  });
+  let evento = {
+    nome: "teste",
+    onde: "seila",
+  };
+
+var calendar = new FullCalendar.Calendar(calendarEl, {
+  initialDate: data_cal, //data inicial
+  editable: true,
+  locale: "pt-br", //localização BR
+  selectable: true,
+  businessHours: true,
+  dayMaxEvents: true, // allow "more" link when too many events
+  events: [
+    {
+      title: "Fiscalizção",
+      start: "2024-04-25T08:45:00",
+    },
+    {
+      title: evento.onde,
+      start: "2024-04-21T09:45:00",
+    },
+  ],
+});
+
+calendar.render(); //renderiza o calendar
 
 
 
 
 
-
-
-
-  calendar.render(); //renderiza o calendar
-
-  $.ajax({  /* jQuery */
-  url: "./dados.php",
+$.ajax({
+  /* jQuery */ url: "./dados.php",
   dataType: "json",
-  success: function(agendamento) {
+  success: function (agendamento) {
     console.log(agendamento.id);
   },
   error: function () {
     console.log("deu ruim");
   },
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
-
-
 
 /* $(document).ready(function(){ //jQuery
     $.ajax({
@@ -76,3 +67,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //Importando DADOS do PHP exemplo:
 //
+4;

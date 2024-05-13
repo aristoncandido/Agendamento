@@ -9,6 +9,9 @@
     <title>Agendamento de Salas</title>
 </head>
 
+<style>
+
+</style>
 
 <body>
 
@@ -26,20 +29,20 @@
 
 
             </div>
-            <form action="">
+            <form action="dados.php" method='request'>
                 <div class="d-flex flex-column w-50 m-auto">
                     <label for="local">Local</label>
-                    <select name="local" id="local">
-                        <option value="sala">COREN-PE(SEDE)</option>
+                    <select id="local" name="local">
+                        <option >COREN-PE(SEDE)</option>
                     </select>
                     <label for="sala">Sala</label>
-                    <select name="sala" id="sala">
-                        <option value="MURO ALTO">SALA MURO ALTO</option>
+                    <select id="sala" name="sala">
+                        <option >SALA MURO ALTO</option>
                     </select>
                     <div class="bttns mt-3">
-                        <input class="btn btn-primary" type="button" value="Verificar">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Verificar">
                     </div>
-                     <br>
+                    <br>
                     <span class="text-center ">Desenvolvido pelo Departamento de Tecnologia da Informação <break> COREN
                             -
                             PE</span>
