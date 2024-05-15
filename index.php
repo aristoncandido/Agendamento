@@ -29,15 +29,15 @@
 
 
             </div>
-            <form action="dados.php" method='request'>
+            <form action="dados.php" method='POST'>
                 <div class="d-flex flex-column w-50 m-auto">
                     <label for="local">Local</label>
-                    <select id="local" name="local">
+                    <select id="local" name="local" >
                         <option >COREN-PE(SEDE)</option>
                     </select>
                     <label for="sala">Sala</label>
                     <select id="sala" name="sala">
-                        <option >SALA MURO ALTO</option>
+                        <option >MURO ALTO</option>
                     </select>
                     <div class="bttns mt-3">
                         <input class="btn btn-primary" type="submit" name="submit" value="Verificar">

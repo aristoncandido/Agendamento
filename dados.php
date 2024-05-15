@@ -4,39 +4,54 @@ include_once('config.php');
 
 session_start();
 
-if (isset($_REQUEST['local']) && isset($_REQUEST['sala']) && isset($_REQUEST['submit'])) {
-    // Verifica se foi setado
+if (isset($_POST['local']) && isset($_POST['sala'])) {
+    $local = $_POST['local'];  // Valida e sanitiza o local
+    $sala = $_POST['sala'];   // Valida e sanitiza a sala
 
-    sleep(3); // Dorme por 3 segundos
-    $local = filter_input(INPUT_POST, 'local', FILTER_SANITIZE_STRING); // Valida e sanitiza o local
-    $sala = filter_input(INPUT_POST, 'sala', FILTER_SANITIZE_STRING); // Valida e sanitiza a sala
+    // Verificar se a conexão com o banco de dados foi estabelecida corretamente
+    if ($conn->connect_error){
+        die('Erro de conexão com o banco de dados: ' . $conn->connect_error);
+    }
 
     // Consulta no banco
-    $sql = 'SELECT * FROM agenda_sala WHERE sala = ?';
+    $sql = "SELECT * FROM agenda_salas WHERE sala = ? ";
 
     $stmt = $conn->prepare($sql); // Prepara a consulta
 
     if (!$stmt) {
-        die('Erro ao consultar');
+        die('Erro ao preparar a consulta: ' . $conn->error);
     }
 
-    $stmt->bind_param('s', $sala); // Passa o parâmetro para a consulta
+    // Correção: Vincular o parâmetro à consulta preparada
+    $stmt->bind_param('s', $sala);
 
-    $stmt->execute();
+    // Correção: Executar a consulta preparada
+    if (!$stmt->execute()) {
+        die('Erro ao executar a consulta: ' . $stmt->error);
+    }
 
-    $result = $stmt->get_result(); // Obtém o resultado da consulta
+    $result = $stmt->get_result();
 
+    // Obtém o resultado da consulta
     if ($result->num_rows > 0) {
-        $evento = $result->fetch_array(MYSQLI_ASSOC); // Recupera o evento como array associativo
-
-        echo $evento['sala']; // Acessa a propriedade 'sala' do array
-
+        $evento = $result->fetch_assoc();         // -> Recupera o evento como array associativo
+        $agenda = json_encode($evento);
+        echo $agenda;
     } else {
-        echo "Nenhum registro encontrado";
+        http_response_code(404); // Retorna código de status HTTP 404 se não houver dados
+        echo json_encode(array('error' => 'Nenhum agendamento encontrado.'));
     }
+} else {
+    http_response_code(400); // Retorna código de status HTTP 400 para solicitações inválidas
+    echo json_encode(array('error' => 'Parâmetros Inválidos'));
 }
 
-// Busca agendamentos
+?>
+
+
+
+<!-- 
+/* // Busca agendamentos
 $stmt = $conn->prepare($sql); // Prepara a consulta (reutiliza a mesma consulta)
 $stmt->execute();
 $result = $stmt->get_result();
@@ -50,6 +65,5 @@ if ($result->num_rows > 0) {
 } else {
     http_response_code(404); // Retorna código de status HTTP 404 se não houver dados
     echo json_encode(array('message' => 'Nenhum agendamento encontrado.'));
-}
-
-?>
+} */
+ -->
